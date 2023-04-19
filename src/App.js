@@ -2,6 +2,7 @@ import { Route, Routes, Link } from "react-router-dom"
 import HomePage from "./pages/home";
 import ProductPage from "./pages/product";
 import ProductListPage from "./pages/product/list";
+import ProductEditPage from "./pages/product/edit";
 
 export function App() {
     return (
@@ -13,10 +14,11 @@ export function App() {
                 </ul>
             </nav>
             <Routes>
-                <Route path='/' element={<HomePage />} />
-                <Route path='/products' element={<ProductListPage />} />
-                <Route path='/products/:id' element={<ProductPage />} />
-                <Route path="*" element={<HomePage />} />
+                <Route exact path='/' element={<HomePage />} />
+                <Route exact path='/products' element={<ProductListPage />} />
+                <Route exact path='/products/:id' element={<ProductPage />} />
+                <Route exact path='/products/:id/edit' element={<ProductEditPage />} />
+                <Route path="*" element={<h1>Page ot found</h1>} />
             </Routes>
         </>
     )
