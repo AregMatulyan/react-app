@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import DummyJsonClient from '../../services/api/apiClient';
 import { useParams } from "react-router-dom";
+import {Box, ImageList, ImageListItem, Typography} from '@mui/material';
+import ProductLabel from "../../components/product/label";
 
 const ProductPage = () => {
     const [isLoading, setIsLoading] = useState(true);
@@ -26,17 +28,33 @@ const ProductPage = () => {
     }
 
     return (
-        <div>
-            <h2>{product.title}</h2>
-            <div><b>Brand:</b> {product.brand}</div>
-            <div><b>Category:</b> {product.category}</div>
-            <div><b>Description:</b> {product.description}</div>
-            {product.images.map(image => (
-                <React.Fragment key={image}>
-                    <img src={image} alt=""/>
-                </React.Fragment>
-            ))}
-        </div>
+        <Box sx={{ pt: 10 }}>
+            <Typography variant="h3">
+                {product.title}
+            </Typography>
+
+            <Typography variant="body1" paragraph={true} align="justify" sx={{py: 3}}>
+                {product.description}
+            </Typography>
+
+            <ProductLabel label="Brand" value={product.brand} />
+            <ProductLabel label="Category" value={product.category} />
+            <ProductLabel label="Price" value={product.price} />
+            <ProductLabel label="In Stock" value={product.stock} />
+            <ProductLabel label="Rating" value={product.rating} />
+
+            <ImageList cols={3} gap={30}>
+                {product.images.map(image => (
+                    <ImageListItem key={image}>
+                        <img
+                            src={image}
+                            alt=""
+                            loading="lazy"
+                        />
+                    </ImageListItem>
+                ))}
+            </ImageList>
+        </Box>
     )
 }
 
