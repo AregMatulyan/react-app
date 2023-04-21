@@ -18,6 +18,11 @@ Additional packages that used in the application
 
 ## Installation
 
+Copy environment variables
+```shell
+cp .env.example .env
+```
+
 Install dependencies
 ```shell
 yarn
@@ -33,3 +38,14 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+## Configuration
+
+In order to edit Products list table columns or rows you can 
+change values in environment variables and restart the application.
+
+```shell
+REACT_APP_LIMIT_PRODUCT_PER_PAGE=15
+
+REACT_APP_PRODUCT_LIST_CELLS=title,price,brand,category
+```
