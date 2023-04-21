@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import DummyJsonClient from '../../services/api/apiClient';
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import {Box, ImageList, ImageListItem, Typography} from '@mui/material';
+import { Box, ImageList, ImageListItem, Typography, Button } from '@mui/material';
 import ProductLabel from "../../components/product/label";
+import {routes} from "../../router";
 
 const ProductPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [product, setProduct] = useState(null);
+    const navigate = useNavigate();
     const {id} = useParams();
 
     useEffect(() => {
@@ -42,6 +45,13 @@ const ProductPage = () => {
             <ProductLabel label="Price" value={product.price} />
             <ProductLabel label="In Stock" value={product.stock} />
             <ProductLabel label="Rating" value={product.rating} />
+
+            <Button
+                variant="contained"
+                onClick={() => navigate(routes.product_edit.replace(':id', id))}
+            >
+                Edit
+            </Button>
 
             <ImageList cols={3} gap={30}>
                 {product.images.map(image => (
